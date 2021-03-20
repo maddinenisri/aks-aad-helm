@@ -281,9 +281,8 @@ resource "helm_release" "aad_pod_id" {
 
 locals {
   values_config = {
-    azureidentity = [
-      {
-        name = "azure-identity"
+    azureidentities = {
+      azure-identity : {
         type = 0
         resourceID = "${azurerm_user_assigned_identity.mi.id}"
         clientID = "${azurerm_user_assigned_identity.mi.client_id}"
@@ -292,7 +291,7 @@ locals {
           selector = "aad-pod-id-binding-selector"
         }
       }
-    ]
+    }
   }
 }
 
